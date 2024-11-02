@@ -1,13 +1,20 @@
 from todoist_api_python.api import TodoistAPI
-from test import TODOIST_API
+from dotenv import load_dotenv
+import os
 
-api = TodoistAPI(TODOIST_API)
+load_dotenv()  # Loads variables from .env into the environment
+
+TODOSIT_API_KEY = os.getenv("TODOSIT_API_KEY")
+
+
+api = TodoistAPI(TODOSIT_API_KEY)
 
 try:
     projects = api.get_projects()
-    print(projects[0].name)
-    print(projects[1].name)
-    print(projects[2].name)
+
+    for project in projects:
+        print(project.name)
+
     # print(projects)
 except Exception as error:
     print(error)
