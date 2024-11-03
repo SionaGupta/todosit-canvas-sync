@@ -8,9 +8,3 @@ class TodositTask:
         self.description = description
         self.section_id = section_id
 
-
-    def bark(self):
-        return f"{self.name} says woof!"
-
-    def info(self):
-        return f"{self.name} is a {self.id}."
