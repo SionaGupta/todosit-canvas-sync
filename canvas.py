@@ -12,5 +12,6 @@ s.headers.update({'Authorization': 'Bearer {CANVAS_API_KEY}'})
 
 try:
     r = s.get('https://<canvas>/api/v1/courses')
+    print(r)
 except requests.exceptions.RequestException as e:  # This is the correct syntax
     raise SystemExit(e)
