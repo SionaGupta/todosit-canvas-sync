@@ -8,7 +8,7 @@ print(os.getenv("test_key"))
 api = TodoistAPI(os.environ.get('TODOIST_API_KEY'))
 
 
-try:
+try: 
     projects = api.get_projects()
 
     for project in projects:

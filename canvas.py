@@ -5,13 +5,36 @@ import os
 load_dotenv()  # Loads variables from .env into the environment
 
 CANVAS_API_KEY  = os.environ.get('CANVAS_API_KEY')
+BASE_URL = "https://ilearn.laccd.edu/api/v1"
 
 
-s = requests.Session()
-s.headers.update({'Authorization': 'Bearer {CANVAS_API_KEY}'})
+requests = requests.Session()
 
-try:
-    r = s.get('https://<canvas>/api/v1/courses')
-    print(r)
-except requests.exceptions.RequestException as e:  # This is the correct syntax
-    raise SystemExit(e)
+# Set up headers for authentication
+headers = {
+    "Authorization": f"Bearer {CANVAS_API_KEY}"
+}
+
+def list_courses():
+    url = f"{BASE_URL}/courses"
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        courses = response.json()
+        for course in courses:
+            print(f"Course ID: {course['id']}, Name: {course['name']}")
+    else:
+            # Simplify the error message
+        error_message = f"Error {response.status_code}: {response.reason}"
+        try:
+            # Try to extract additional details from the JSON error response
+            error_details = response.json()
+            error_message += f" - {error_details.get('errors', error_details.get('message', 'No additional details'))}"
+        except ValueError:
+            # Handle cases where the response isn't JSON
+            pass
+        print(error_message)
+
+
+list_courses()
