@@ -62,12 +62,11 @@ def list_current_courses():
 
         # loop over ever active course 
         for course in courses:
-            print(f"Course ID: {course['id']}, Name: {course['name']}")
             course_name = course['name']
-           
-            assignments = get_assignments(course['id'])
-  
-            add_assignments(assignments, course_name)
+            if (course['end_at'] is None) or (course['end_at'][:4] == 2025):
+                print(f"Course ID: {course['id']}, Name: {course['name']}")
+                assignments = get_assignments(course['id'])
+                add_assignments(assignments, course_name)
         
             
     # Error        
