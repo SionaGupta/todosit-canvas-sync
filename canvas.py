@@ -15,13 +15,22 @@ headers = {
     "Authorization": f"Bearer {CANVAS_API_KEY}"
 }
 
-def list_courses():
+def list_current_courses():
+    # link
     url = f"{BASE_URL}/courses"
     
-    response = requests.get(url, headers=headers)
+    # filter for active courses 
+    params = {
+        "enrollment_state": "active"  # Fetch only active courses
+    }
+
+    response = requests.get(url, headers=headers, params=params)
     
     if response.status_code == 200:
+        # convert from json
         courses = response.json()
+
+        # loop over ever active course 
         for course in courses:
             print(f"Course ID: {course['id']}, Name: {course['name']}")
     else:
@@ -37,4 +46,4 @@ def list_courses():
         print(error_message)
 
 
-list_courses()
+list_current_courses()
