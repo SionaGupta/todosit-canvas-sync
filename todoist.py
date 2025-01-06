@@ -32,6 +32,7 @@ def add_assignments(assignments, course_name):
     # Check if the course name is not in any section's name
     if not any(course_name == section.name for section in sections) or not sections:
         try:
+            course_name = str(course_name)
             section = api.add_section(name=course_name, project_id=project_id)
             print(section)
         except Exception as error:
