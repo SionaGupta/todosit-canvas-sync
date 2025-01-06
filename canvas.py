@@ -64,11 +64,11 @@ def list_current_courses():
         for course in courses:
             print(f"Course ID: {course['id']}, Name: {course['name']}")
             course_name = course['name']
-            print("")
-            assignments = get_assignments(course_name)
-            print("assignments")
+           
+            assignments = get_assignments(course['id'])
+  
             add_assignments(assignments, course_name)
-            print("")
+        
             
     # Error        
     else:

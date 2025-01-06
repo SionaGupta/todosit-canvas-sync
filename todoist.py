@@ -18,7 +18,6 @@ def add_assignments(assignments, course_name):
 
     for project in projects: 
         if (project.name == "College Classes"):
-            print("found Project id")
             project_id = project.id
         
 
@@ -48,28 +47,25 @@ def add_assignments(assignments, course_name):
         add_oneassignment(assignment, project_id, section_id)
 
 
-def convert_due_date(due_at):
-    user_timezone = America/Los_Angeles
-
-    # Parse the ISO 8601 date-time string into a datetime object
-    parsed_datetime = datetime.fromisoformat(due_at)
-
-    # Convert the datetime to the user's timezone
-    target_timezone = pytz.timezone(user_timezone)
-    localized_datetime = parsed_datetime.astimezone(target_timezone)
-
-    # Format the date as "YYYY-MM-DD"
-    formatted_date = localized_datetime.strftime("%Y-%m-%d")
-    return formatted_date
-
-
 def add_oneassignment(assignment, project_id, section_id):
     # wororkeokp
     try:
-        print(assignment.name)
-        print(assignment.due_at)
-        duedate = convert_due_date(assignment.due_at)
-        task = api.add_task(content=assignment.name, project_id=project.id, section_id=section_id, due=duedate)
+        duedate = assignment['due_at']
+        duedate = duedate[:10]
+
+        task_data = {
+            'content': assignment['name'],  # Task content
+            'project_id': project_id,       # Project ID
+            'section_id': section_id,       # Section ID
+            'due': {                        # Due date (optional)
+                'date': duedate,            # Specify the due date
+            }
+        }
+
+        alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
+
+        if not any(assignment['name'] == alltask.content for alltask in alltasks):
+            task = api.add_task(**task_data)
 
     except Exception as error:
         print(error) 
