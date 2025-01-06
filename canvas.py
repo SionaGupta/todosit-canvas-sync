@@ -24,11 +24,7 @@ def get_assignments(course_id):
     if response.status_code == 200:
         # convert from json
         assignments = response.json()
-
-        # loop over ever active course 
-        for assignment in assignments:
-            print(f"Assignment Name: {assignment['name']}, Due Date: {assignment['due_at']}")
-            
+  
     # Error        
     else:
             # Simplify the error message
@@ -44,7 +40,6 @@ def get_assignments(course_id):
         print(error_message)
 
     return assignments 
-
 
 
 def list_current_courses():
@@ -67,7 +62,7 @@ def list_current_courses():
         for course in courses:
             print(f"Course ID: {course['id']}, Name: {course['name']}")
             assignments = get_assignments(course['id'])
-            add_assignments(assignments, course.id)
+            add_assignments(assignments, course['id'])
             
     # Error        
     else:
@@ -78,7 +73,7 @@ def list_current_courses():
             # Try to extract additional details from the JSON error response
             error_details = response.json()
             error_message += f" - {error_details.get('errors', error_details.get('message', 'No additional details'))}"
-        except ValueError:
+        except ValueError: 
             # Handle cases where the response isn't JSON
             pass
         print(error_message)
