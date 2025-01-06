@@ -57,9 +57,9 @@ def add_oneassignment(assignment, project_id, section_id):
             'content': assignment['name'],  # Task content
             'project_id': project_id,       # Project ID
             'section_id': section_id,       # Section ID
-            'due': {                        # Due date (optional)
-                'date': duedate,            # Specify the due date
-            }
+            'due_date': duedate,  # Task due date
+            'priority': 2
+
         }
 
         alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
