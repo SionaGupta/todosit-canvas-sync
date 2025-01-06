@@ -43,6 +43,8 @@ def get_assignments(course_id):
             pass
         print(error_message)
 
+    return assignments 
+
 
 
 def list_current_courses():
@@ -64,7 +66,8 @@ def list_current_courses():
         # loop over ever active course 
         for course in courses:
             print(f"Course ID: {course['id']}, Name: {course['name']}")
-            get_assignments(course['id'])
+            assignments = get_assignments(course['id'])
+            add_assignments(assignments, course.id)
             
     # Error        
     else:
