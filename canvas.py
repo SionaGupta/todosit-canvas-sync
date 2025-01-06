@@ -21,6 +21,8 @@ def get_assignments(course_id):
 
     response = requests.get(url, headers=headers)
 
+    assignments = []
+
     if response.status_code == 200:
         # convert from json
         assignments = response.json()
@@ -61,8 +63,12 @@ def list_current_courses():
         # loop over ever active course 
         for course in courses:
             print(f"Course ID: {course['id']}, Name: {course['name']}")
-            assignments = get_assignments(course.name)
-            add_assignments(assignments, course.name)
+            course_name = course['name']
+            print("")
+            assignments = get_assignments(course_name)
+            print("assignments")
+            add_assignments(assignments, course_name)
+            print("")
             
     # Error        
     else:

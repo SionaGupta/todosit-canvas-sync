@@ -24,7 +24,6 @@ def add_assignments(assignments, course_name):
 
     try:
         sections = api.get_sections(project_id=project_id)
-        print(sections)
     except Exception as error:
         print(error)
 
