@@ -21,7 +21,12 @@ def get_assignments(course_id):
     # link
     url = f"{BASE_URL}/courses/{course_id}/assignments"
 
-    response = requests.get(url, headers=headers)
+    # filter for active courses 
+    params = {
+        "include": "submission"  # Include the course term in the response
+    }
+
+    response = requests.get(url, headers=headers, params=params)
 
     assignments = []
 

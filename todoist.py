@@ -56,12 +56,24 @@ def add_oneassignment(assignment, project_id, section_id):
         duedate = assignment['due_at']
         duedate = duedate[:10]
 
+
+        sub = assignment['submission']
+
+        complete = False 
+
+        if (sub['attempt']):
+            print("done")
+            complete = True
+        
+        print(complete)
+
         task_data = {
             'content': assignment['name'],  # Task content
             'project_id': project_id,       # Project ID
             'section_id': section_id,       # Section ID
             'due_date': duedate,  # Task due date
-            'priority': 2
+            'priority': 2,
+            'is_completed': True
 
         }
 
@@ -69,7 +81,25 @@ def add_oneassignment(assignment, project_id, section_id):
 
         if not any(assignment['name'] == alltask.content for alltask in alltasks):
             task = api.add_task(**task_data)
+        
+        else:
+            task_id = 1
 
+            for alltask in alltasks:
+                if assignment['name'] == alltask.content:
+                    task_id = alltask.id
+
+                    if complete:
+                        try:
+                            is_success = api.update_task(task_id=task_id, is_completed=True)
+                            print(is_success)
+
+                        except Exception as error:
+                            print(error)
+            
+
+
+        
     except Exception as error:
         print(error) 
 
