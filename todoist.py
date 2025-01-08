@@ -37,11 +37,13 @@ def add_assignments(assignments, course_name):
             print(error)
         print("Adding Section")
 
-    
+    sections = api.get_sections(project_id=project_id)
+
     # find section id
     for section in sections: 
+        print (section.name + " " + course_name)
         if (course_name == section.name):
-            print("right section")
+            print("right")
             section_id = section.id  
  
     for assignment in assignments: 
