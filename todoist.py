@@ -41,6 +41,7 @@ def add_assignments(assignments, course_name):
     # find section id
     for section in sections: 
         if (course_name == section.name):
+            print("right section")
             section_id = section.id  
  
     for assignment in assignments: 

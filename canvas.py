@@ -7,6 +7,8 @@ load_dotenv()  # Loads variables from .env into the environment
 
 CANVAS_API_KEY  = os.environ.get('CANVAS_API_KEY')
 BASE_URL = "https://ilearn.laccd.edu/api/v1"
+curTerm = "Winter 2025"
+
 
 requests = requests.Session()
 
@@ -50,7 +52,9 @@ def list_current_courses():
     
     # filter for active courses 
     params = {
-        "enrollment_state": "active"  # Fetch only active courses
+        "enrollment_state": "active",  # Fetch only active courses
+        "include": "term"  # Include the course term in the response
+
     }
 
     # collect data 
@@ -59,11 +63,14 @@ def list_current_courses():
     if response.status_code == 200:
         # convert from json
         courses = response.json()
+        
 
         # loop over ever active course 
         for course in courses:
             course_name = course['name']
-            if (course['end_at'] is None) or (course['end_at'][:4] == 2025):
+            term = course['term']
+
+            if (term['name'] == curTerm):
                 print(f"Course ID: {course['id']}, Name: {course['name']}")
                 assignments = get_assignments(course['id'])
                 add_assignments(assignments, course_name)
