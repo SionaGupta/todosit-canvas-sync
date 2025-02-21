@@ -54,6 +54,7 @@ def add_oneassignment(assignment, project_id, section_id):
     # wororkeokp
     try:
         duedate = assignment['due_at']
+        print(assignment['name'] + " " + assignment['due_at'])
         duedate = duedate[:10]
 
 
@@ -80,7 +81,7 @@ def add_oneassignment(assignment, project_id, section_id):
         alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
 
         if not any(assignment['name'] == alltask.content for alltask in alltasks):
-            print(task_data['content'] + " " + task_data['due_date'])
+            
             task = api.add_task(**task_data)
         
         else:

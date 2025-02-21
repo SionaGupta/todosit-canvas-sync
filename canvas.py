@@ -55,7 +55,7 @@ def list_current_courses():
     # link
     url = f"{BASE_URL}/courses"
     
-    # filter for active courses 
+    # filter for ac tive courses 
     params = {
         "enrollment_state": "active",  # Fetch only active courses
         "include": "term"  # Include the course term in the response
