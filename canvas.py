@@ -1,6 +1,7 @@
 import requests
 from dotenv import load_dotenv
 from todoist import add_assignments 
+from datetime import datetime
 import os
 
 load_dotenv()  # Loads variables from .env into the environment
