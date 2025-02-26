@@ -81,7 +81,7 @@ def add_oneassignment(assignment, project_id, section_id):
         alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
 
         if not any(assignment['name'] == alltask.content for alltask in alltasks):
-            if datetime.today().strftime('%Y-%m-%d') < task_data['due_date']:
+            if task_data['is_completed'] == False:
                 task = api.add_task(**task_data)
         
         else:
