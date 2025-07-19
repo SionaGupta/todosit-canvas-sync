@@ -8,7 +8,7 @@ load_dotenv()  # Loads variables from .env into the environment
 
 CANVAS_API_KEY  = os.environ.get('CANVAS_API_KEY')
 BASE_URL = "https://ilearn.laccd.edu/api/v1"
-curTerm = "Spring 2025"
+curTerm = "Summer 2025"
 
 
 requests = requests.Session()
