@@ -47,6 +47,7 @@ def add_assignments(assignments, course_name):
             section_id = section.id  
  
     for assignment in assignments: 
+        print(assignment['name'])
         add_oneassignment(assignment, project_id, section_id)
 
 
@@ -115,4 +116,3 @@ def test_sections():
             print(section)
         except Exception as error:
             print(error)
-

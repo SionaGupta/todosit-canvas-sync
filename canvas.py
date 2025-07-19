@@ -20,7 +20,7 @@ headers = {
 
 def get_assignments(course_id):
     # link
-    url = f"{BASE_URL}/courses/{course_id}/assignments"
+    url = f"{BASE_URL}/courses/{course_id}/assignments?per_page=100"
 
     # filter for active courses 
     params = {
