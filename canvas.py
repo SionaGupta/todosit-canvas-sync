@@ -10,7 +10,6 @@ CANVAS_API_KEY  = os.environ.get('CANVAS_API_KEY')
 BASE_URL = "https://ilearn.laccd.edu/api/v1"
 curTerm = "Summer 2025"
 
-
 requests = requests.Session()
 
 # Set up headers for authentication

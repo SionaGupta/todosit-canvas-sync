@@ -5,7 +5,7 @@ import pytz
 import os
 
 california_tz = pytz.timezone('America/Los_Angeles')
-
+projectName = "Education 📚"
 
 load_dotenv()  # Loads variables from .env into the environment
 
@@ -21,7 +21,7 @@ def add_assignments(assignments, course_name):
     projects = api.get_projects()
 
     for project in projects: 
-        if (project.name == "College Classes"):
+        if (project.name == projectName):
             project_id = project.id
         
 
@@ -129,7 +129,7 @@ def test_tasks():
     projects = api.get_projects()
 
     for project in projects: 
-        if (project.name == "College Classes"):
+        if (project.name == projectName):
             sections = api.get_sections()
             for section in sections: 
                 if (section.name == 'MATH 270 : Linear Algebra - Zheng A. - SUMMER 2025 - SECTION# 10425'):
