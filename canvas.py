@@ -81,7 +81,7 @@ def list_current_courses():
                 assignments = get_assignments(course['id'])
                 add_assignments(assignments, course_name)
         
-            
+
     # Error        
     else:
             # Simplify the error message
