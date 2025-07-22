@@ -103,16 +103,14 @@ def add_oneassignment(assignment, project_id, section_id):
                         #update task if different
                         update = api.close_task(task_id=task.id)
                         print(update)
-                    else: 
-                        print('not found')
-                        #add task
-                        if (active == True):
-                            task = api.add_task(**task_data)
-        else: 
-            print('not found')
-            #add task
-            if (active == True):
-                task = api.add_task(**task_data)                
+                        
+                    return 0;  
+
+        print('not found')
+        #add task
+        if (active == True):
+            print("active")
+            task = api.add_task(**task_data)                
             
     except Exception as error:
         print(error) 
