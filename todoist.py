@@ -9,7 +9,6 @@ projectName = "Education 📚"
 
 load_dotenv()  # Loads variables from .env into the environment
 
-print(os.getenv("test_key"))
 api = TodoistAPI(os.environ.get('TODOIST_API_KEY'))
 
 
