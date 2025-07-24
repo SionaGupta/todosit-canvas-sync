@@ -12,7 +12,7 @@ load_dotenv()  # Loads variables from .env into the environment
 api = TodoistAPI(os.environ.get('TODOIST_API_KEY'))
 
 
-def add_assignments(assignments, course_name):
+def add_section(course_name):
     
     section_id = 1
     project_id = 1
@@ -48,9 +48,12 @@ def add_assignments(assignments, course_name):
         if (course_name == section.name):
             print("right")
             section_id = section.id  
- 
-    for assignment in assignments: 
-        add_oneassignment(assignment, project_id, section_id)
+    info = {
+    'project': project_id,
+    'section': section_id
+    }
+
+    return info
 
 
 def time_pst(date):

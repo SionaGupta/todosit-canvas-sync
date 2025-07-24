@@ -4,28 +4,25 @@ from todoist import *
 
 term = "Summer 2025"
 
+print("\n")
+
 # gather all courses 
 courses = list_current_courses(term)
-
-for course in courses: 
-    print(course['name'])
-
-
-
-
-
-
-
 
 
 # loop over ever active course 
 for course in courses:
-    course_name = course['name']
-    term = course['term']
 
-    if (term['name'] == term):
-        print(f"Course ID: {course['id']}, Name: {course['name']}")
-        assignments = get_assignments(course['id'])
-        add_assignments(assignments, course_name)   
+    print(course['name'])
+
+    assignments = get_assignments(course['id'])
+    
+    info = add_section(course['id'])
+
+    for assignment in assignments: 
+        add_oneassignment(assignment, info.project, info.section)
+
+    add_assignments(assignments, course['name'])
+    print("\n")  
 
 print("\n")
