@@ -16,13 +16,12 @@ for course in courses:
     print(course['name'])
 
     assignments = get_assignments(course['id'])
-    
+
     info = add_section(course['id'])
 
     for assignment in assignments: 
         add_oneassignment(assignment, info.project, info.section)
 
-    add_assignments(assignments, course['name'])
     print("\n")  
 
 print("\n")
