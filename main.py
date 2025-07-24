@@ -11,6 +11,13 @@ for course in courses:
     print(course['name'])
 
 
+
+
+
+
+
+
+
 # loop over ever active course 
 for course in courses:
     course_name = course['name']
