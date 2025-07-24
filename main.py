@@ -21,3 +21,4 @@ for course in courses:
         assignments = get_assignments(course['id'])
         add_assignments(assignments, course_name)   
 
+print("\n")
