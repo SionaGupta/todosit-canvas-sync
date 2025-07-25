@@ -139,3 +139,7 @@ def test_tasks():
                     except Exception as error: 
                         print(error)
 
+
+def finish(projectid):
+    task = api.add_task(content="Updated Todoist!", project_id=projectid)
+    print("Finished")

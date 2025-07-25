@@ -23,4 +23,6 @@ for course in courses:
 
     print("\n")  
 
+finish(info['project'])
+
 print("\n")
