@@ -1,4 +1,3 @@
-from classes import information
 from canvas import *
 from todoist import *
 
