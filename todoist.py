@@ -98,8 +98,8 @@ def add_oneassignment(assignment, project_id, section_id):
                     if (active == False):
                         task_id = alltask.id 
                         #update task if different
-                        update = api.close_task(task_id=task.id)
-                        print("update")
+                        update = api.close_task(task_id=task_id)
+                        print(update)
         
                     return 0;  
 
