@@ -17,10 +17,10 @@ for course in courses:
 
     assignments = get_assignments(course['id'])
 
-    info = add_section(course['id'])
+    info = add_section(course['name'])
 
     for assignment in assignments: 
-        add_oneassignment(assignment, info.project, info.section)
+        add_oneassignment(assignment, info['project'], info['section'])
 
     print("\n")  
 

@@ -23,7 +23,6 @@ def add_section(course_name):
         if (project.name == projectName):
             project_id = project.id
         
-
     try:
         sections = api.get_sections(project_id=project_id)
     except Exception as error:
@@ -44,10 +43,10 @@ def add_section(course_name):
 
     # find section id
     for section in sections: 
-        print (section.name + " " + course_name)
         if (course_name == section.name):
-            print("right")
+            print("Found Section")
             section_id = section.id  
+    
     info = {
     'project': project_id,
     'section': section_id
@@ -71,12 +70,15 @@ def add_oneassignment(assignment, project_id, section_id):
     try:
         date = time_pst(assignment['due_at'])
         
-        print(assignment['name'] + " " + date)
+        name = assignment['name']
+        name = name.strip()
+
+        print(name + " " + date)
        
         active = assignment['submission']['attempt'] == None
 
         task_data = {
-            'content': assignment['name'],  # Task content
+            'content': name,  # Task content
             'project_id': str(project_id),       # Project ID
             'section_id': str(section_id),       # Section ID
             'due_date': date,  # Task due date
@@ -84,15 +86,12 @@ def add_oneassignment(assignment, project_id, section_id):
         }
 
         alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
-    
 
         #Check if current task is already listed
         if alltasks:
-            for task in alltasks: 
-                print(task.content)
-
             for alltask in alltasks:
-                if (assignment['name'] == alltask.content):        
+                #if task is already there
+                if (name == alltask.content):        
                     print('found')
 
                     #if listed, check if task is completed since last update     
@@ -100,8 +99,8 @@ def add_oneassignment(assignment, project_id, section_id):
                         task_id = alltask.id 
                         #update task if different
                         update = api.close_task(task_id=task.id)
-                        print(update)
-                        
+                        print("update")
+        
                     return 0;  
 
         print('not found')
