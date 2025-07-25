@@ -61,23 +61,19 @@ def time_pst(date):
     utc_dt = pytz.utc.localize(utc_dt)
     california_dt = utc_dt.astimezone(california_tz)
     california_dt = str(california_dt)
-    return california_dt
+    date = california_dt[:10]
+    return date
 
+        
 
 def add_oneassignment(assignment, project_id, section_id):
     # wororkeokp
     try:
-        duedate = assignment['due_at']
-        #adjust time
-        duedate = time_pst(duedate);
-        #remove time
-        date = duedate[:10]
-        print(assignment['name'] + " " + duedate)
-
-        sub = assignment['submission']
-        active = sub['attempt'] == None
+        date = time_pst(assignment['due_at'])
         
-        print(date)
+        print(assignment['name'] + " " + date)
+       
+        active = assignment['submission']['attempt'] == None
 
         task_data = {
             'content': assignment['name'],  # Task content
