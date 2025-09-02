@@ -1,7 +1,7 @@
 from canvas import *
 from todoist import *
 
-term = "Summer 2025"
+term = "Fall 2025"
 
 print("\n")
 
