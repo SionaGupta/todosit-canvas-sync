@@ -87,24 +87,24 @@ def add_oneassignment(assignment, project_id, section_id):
 
         alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
 
-        #Check if current task is already listed
+        # Check if current task is already listed
         if alltasks:
             for alltask in alltasks:
-                #if task is already there
+                # if task is already there
                 if (name == alltask.content):        
                     print('found')
 
-                    #if listed, check if task is completed since last update     
+                    # if listed, check if task is completed since last update     
                     if (active == False):
                         task_id = alltask.id 
-                        #update task if different
+                        # update task if different
                         update = api.close_task(task_id=task_id)
                         print(update)
         
                     return 0;  
 
         print('not found')
-        #add task
+        # add task
         if (active == True):
             print("active")
             task = api.add_task(**task_data)                
