@@ -18,7 +18,12 @@ def add_section(course_name):
     project_id = 1
     # find project ID
     projects = api.get_projects()
+    print(projects)
 
+    projects_list = list(api.get_projects())
+    print(projects_list[0].name)
+
+    
     for project in projects: 
         if (project.name == projectName):
             project_id = project.id

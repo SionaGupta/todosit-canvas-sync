@@ -1,5 +1,6 @@
 from canvas import *
-from todoist import *
+from todoist2 import *
+
 
 term = "Fall 2025"
 
