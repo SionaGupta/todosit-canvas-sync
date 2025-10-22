@@ -13,17 +13,18 @@ courses = list_current_courses(term)
 # loop over ever active course 
 for course in courses:
 
-    print(course['name'])
+    print(course['name'] + "\n")
 
     assignments = get_assignments(course['id'])
+
 
     info = add_section(course['name'])
 
     for assignment in assignments: 
-        add_oneassignment(assignment, info['project'], info['section'])
+        if assignment['due_at']:
+            add_oneassignment(assignment, info['project'], info['section'])
+ 
+    print("\n")
 
-    print("\n")  
-
+# Ending Todoist Task Signal
 finish(info['project'])
-
-print("\n")

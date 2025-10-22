@@ -34,11 +34,13 @@ def list_current_courses(term):
         #send only course for this term
         f_courses = [course for course in courses if course['term']['name'] == term]
 
+        '''
         #print Current Courses 
         for course in f_courses: 
             print(course['name'])
             print("\n")
-
+        '''
+        
         return f_courses
     
     # Error        

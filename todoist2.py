@@ -1,6 +1,6 @@
 from todoist_api_python.api import TodoistAPI
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, date 
 import pytz
 import os
 
@@ -18,11 +18,6 @@ def add_section(course_name):
     project_id = 1
     # find project ID
     projects = api.get_projects()
-    print(projects)
-
-    projects_list = list(api.get_projects())
-    print(projects_list[0].name)
-
     
     for project in projects: 
         if (project.name == projectName):
@@ -39,7 +34,6 @@ def add_section(course_name):
         try:
             course_name = str(course_name)
             section = api.add_section(name=course_name, project_id=project_id)
-            print(section)
         except Exception as error:
             print(error)
         print("Adding Section")
@@ -49,7 +43,7 @@ def add_section(course_name):
     # find section id
     for section in sections: 
         if (course_name == section.name):
-            print("Found Section")
+            print("Found Section " + section.name + "\n")
             section_id = section.id  
     
     info = {
@@ -67,18 +61,17 @@ def time_pst(date):
     california_dt = str(california_dt)
     date = california_dt[:10]
     return date
-
-        
+    
 
 def add_oneassignment(assignment, project_id, section_id):
     # wororkeokp
     try:
-        date = time_pst(assignment['due_at'])
+        taskdate = time_pst(assignment['due_at'])
         
         name = assignment['name']
         name = name.strip()
 
-        print(name + " " + date)
+        print(name + " " + taskdate)
        
         active = assignment['submission']['attempt'] == None
 
@@ -86,7 +79,7 @@ def add_oneassignment(assignment, project_id, section_id):
             'content': name,  # Task content
             'project_id': str(project_id),       # Project ID
             'section_id': str(section_id),       # Section ID
-            'due_date': date,  # Task due date
+            'due_date': taskdate,  # Task due date
             'priority': 2,
         }
 
@@ -97,23 +90,36 @@ def add_oneassignment(assignment, project_id, section_id):
             for alltask in alltasks:
                 # if task is already there
                 if (name == alltask.content):        
-                    print('found')
+                    print('Active')
 
                     # if listed, check if task is completed since last update     
                     if (active == False):
                         task_id = alltask.id 
                         # update task if different
-                        update = api.close_task(task_id=task_id)
-                        print(update)
-        
+                        update = api.complete_task(task_id=task_id)
+                        print('Updated Completion ' + update)
+                    
+                    '''
+                    # if listed, check if task is overdue    
+                    if (date < date.today()):
+                        task_id = alltask.id 
+                        update = api.complete_task(task_id=task_id)
+                        print('Overdue Task Removed ' + update)
+                    '''
+
+                    print("\n")
+
                     return 0;  
 
-        print('not found')
+        print('Completed')
+
         # add task
-        if (active == True):
-            print("active")
+        if (active == True):  
             task = api.add_task(**task_data)                
-            
+            print("Added " + task.name)
+
+        print("\n")
+
     except Exception as error:
         print(error) 
 
