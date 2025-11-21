@@ -45,15 +45,15 @@ def list_current_courses(term):
     
     # Error        
     else:
-            # Simplify the error message
+            # error message
         error_message = f"Error {response.status_code}: {response.reason}"
         
         try:
-            # Try to extract additional details from the JSON error response
+            # additional details from the JSON error response
             error_details = response.json()
             error_message += f" - {error_details.get('errors', error_details.get('message', 'No additional details'))}"
         except ValueError: 
-            # Handle cases where the response isn't JSON
+            # cases where the response isn't JSON
             pass
         print(error_message)
 
@@ -77,15 +77,15 @@ def get_assignments(course_id):
   
     # Error        
     else:
-            # Simplify the error message
+            # error message
         error_message = f"Error {response.status_code}: {response.reason}"
         
         try:
-            # Try to extract additional details from the JSON error response
+            #  additional details from the JSON error response
             error_details = response.json()
             error_message += f" - {error_details.get('errors', error_details.get('message', 'No additional details'))}"
         except ValueError:
-            # Handle cases where the response isn't JSON
+            # not JSON
             pass
         print(error_message)
 
