@@ -2,7 +2,7 @@ from canvas import *
 from todoist2 import *
 
 
-term = "Winter 2026"
+term = "Spring 2026"
 
 print("\n")
 
