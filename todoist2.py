@@ -15,7 +15,8 @@ api = TodoistAPI(os.environ.get('TODOIST_API_KEY'))
 project_id = 1
 
 # find project ID
-projects = api.get_projects()
+projects = [project for page in api.get_projects() for project in page]
+
     
 for project in projects: 
     if (project.name == projectName):
@@ -29,7 +30,8 @@ def add_section(course_name):
 
     # Fetch Sections 
     try:
-        sections = api.get_sections(project_id=project_id)
+        sections = [section for page in api.get_sections(project_id=project_id) for section in page]
+        
     except Exception as error:
         print(error)
 
@@ -43,7 +45,7 @@ def add_section(course_name):
         print("Adding Section")
 
     # Refresh Sections
-    sections = api.get_sections(project_id=project_id)
+    sections = [section for page in api.get_sections(project_id=project_id) for section in page]
 
     # Find Section ID
     for section in sections: 
@@ -93,7 +95,8 @@ def add_oneassignment(assignment, project_id, section_id):
             'priority': 2,
         }
 
-        alltasks = api.get_tasks(project_id=project_id, section_id=section_id)
+        alltasks =  [task for page in api.get_tasks(project_id=project_id, section_id=section_id) for task in page]
+       
 
         # Check if current task is already listed
         if alltasks:
@@ -106,7 +109,7 @@ def add_oneassignment(assignment, project_id, section_id):
                     if (active == False):
                         task_id = alltask.id 
                         # update task if different
-                        update = api.close_task(task_id=task_id)
+                        update = api.complete_task(task_id=task_id)
                         print('Updated Completion ' + str(update))
                     
                     
@@ -120,8 +123,7 @@ def add_oneassignment(assignment, project_id, section_id):
                     print("\n")
 
                     return 0;  
-
-       
+    
 
         # add task
         if (active == True ):  # and overdue == False (for overdue checking)
