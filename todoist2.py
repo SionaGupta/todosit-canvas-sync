@@ -89,9 +89,9 @@ def add_oneassignment(assignment, project_id, section_id):
         
         task_data = {
             'content': name,  # Task content
-            'project_id': str(project_id),       # Project ID
-            'section_id': str(section_id),       # Section ID
-            'due_date': taskdate,  # Task due date
+            'project_id': project_id,       # Project ID
+            'section_id': section_id,       # Section ID
+            'due_date': task_date_object,  # Task due date
             'priority': 2,
         }
 
@@ -114,11 +114,11 @@ def add_oneassignment(assignment, project_id, section_id):
                     
                     
                     # if listed, check if task is overdue   
-                    '''if (overdue == True):
+                    if (overdue == True):
                         task_id = alltask.id 
                         update = api.close_task(task_id=task_id)
                         print('Overdue Task Removed ' + str(update))
-                    '''
+                    
 
                     print("\n")
 
@@ -127,7 +127,8 @@ def add_oneassignment(assignment, project_id, section_id):
 
         # add task
         if (active == True ):  # and overdue == False (for overdue checking)
-            task = api.add_task(**task_data)                
+            print("Adding task")
+            task = api.add_task(**task_data)           
             print("Added " + task.content)
         
 
