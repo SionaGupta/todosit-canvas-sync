@@ -116,7 +116,7 @@ def add_oneassignment(assignment, project_id, section_id):
                     # if listed, check if task is overdue   
                     if (overdue == True):
                         task_id = alltask.id 
-                        update = api.close_task(task_id=task_id)
+                        update = api.complete_task(task_id=task_id)
                         print('Overdue Task Removed ' + str(update))
                     
 
