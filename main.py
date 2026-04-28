@@ -23,8 +23,9 @@ for course in courses:
     for assignment in assignments: 
         if assignment['due_at']:
             add_oneassignment(assignment, info['project'], info['section'])
+            print('')
  
-    print("\n")
+
 
 # Ending Todoist Task Signal
 finish(info['project'])

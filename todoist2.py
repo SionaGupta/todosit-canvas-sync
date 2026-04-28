@@ -76,7 +76,7 @@ def add_oneassignment(assignment, project_id, section_id):
         taskdate = time_pst(assignment['due_at'])
         task_date_object = datetime.strptime(taskdate, "%Y-%m-%d").date()
         overdue = task_date_object < date.today()
-
+        
         name = assignment['name']
         name = name.strip()
 
@@ -95,8 +95,7 @@ def add_oneassignment(assignment, project_id, section_id):
             'priority': 2,
         }
 
-        alltasks =  [task for page in api.get_tasks(project_id=project_id, section_id=section_id) for task in page]
-       
+        alltasks =  [task for page in api.get_tasks(project_id=project_id, section_id=section_id) for task in page]      
 
         # Check if current task is already listed
         if alltasks:
@@ -115,24 +114,18 @@ def add_oneassignment(assignment, project_id, section_id):
                     
                     # if listed, check if task is overdue   
                     if (overdue == True):
+                        print("overdue")
                         task_id = alltask.id 
                         update = api.complete_task(task_id=task_id)
                         print('Overdue Task Removed ' + str(update))
-                    
-
-                    print("\n")
-
+           
                     return 0;  
     
-
         # add task
-        if (active == True ):  # and overdue == False (for overdue checking)
+        if (active == True and overdue == False):  # and overdue == False (for overdue checking)
             print("Adding task")
             task = api.add_task(**task_data)           
             print("Added " + task.content)
-        
-
-        print("\n")
 
     except Exception as error:
         print(error) 
