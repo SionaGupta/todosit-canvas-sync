@@ -105,7 +105,7 @@ def add_oneassignment(assignment, project_id, section_id):
                     print('Active')
 
                     # if listed, check if task is completed since last update     
-                    if (active == False):
+                    if not active or assignment.get("submission", {}).get("score") is not None:
                         task_id = alltask.id 
                         # update task if different
                         update = api.complete_task(task_id=task_id)

@@ -76,7 +76,11 @@ def get_assignments(course_id):
     if response.status_code == 200:
         # convert from json
         assignments = response.json()
-  
+
+
+      
+
+
     # Error        
     else:
             # error message
