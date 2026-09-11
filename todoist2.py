@@ -122,7 +122,7 @@ def add_oneassignment(assignment, project_id, section_id):
                     return 0;  
     
         # add task
-        if (active == True and overdue == False):  # and overdue == False (for overdue checking)
+        if (active == True and overdue == False and assignment.get("submission", {}).get("score") is None):  # and overdue == False (for overdue checking)
             print("Adding task")
             task = api.add_task(**task_data)           
             print("Added " + task.content)
